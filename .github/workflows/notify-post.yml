@@ -33,6 +33,6 @@ jobs:
           username: ${{ secrets.EMAIL_USERNAME }}
           password: ${{ secrets.EMAIL_PASSWORD }}
           subject: "效果升學書局 - 新貼文已產出"
-          to: servicexiyuefei01@gmail.com
+          to: ${{ secrets.EMAIL_USERNAME }}
           from: "效果排程機器人 <${{ secrets.EMAIL_USERNAME }}>"
           body: ${{ steps.build.outputs.body }}
