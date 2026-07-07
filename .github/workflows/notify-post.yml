@@ -20,20 +20,9 @@ jobs:
           BODY="今天的貼文已經寫好並推上 GitHub："
           for f in $FILES; do
             ENCODED=$(python3 -c "import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1]))" "$f")
-            BODY="${BODY}
-https://design02-5.github.io/xiaoguo-social-posts/${ENCODED}"
+            BODY="${BODY}"$'\n'"https://design02-5.github.io/xiaoguo-social-posts/${ENCODED}"
           done
           echo "body<<EOF" >> $GITHUB_OUTPUT
-          echo "$BODY" >> $GITHUB_OUTPUT
-          echo "EOF" >> $GITHUB_OUTPUT
-      - name: Send LINE notification
-        run: |
-          MESSAGE=$(jq -n --arg text "${{ steps.build.outputs.body }}" '{messages: [{type: "text", text: $text}]}')
-          curl -s -X POST https://api.line.me/v2/bot/message/broadcast \
-            -H "Content-Type: application/json" \
-            -H "Authorization: Bearer ${{ secrets.LINE_CHANNEL_ACCESS_TOKEN }}" \
-            -d "$MESSAGE"
-
           echo "$BODY" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
       - name: Send LINE notification
