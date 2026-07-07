@@ -17,7 +17,7 @@ jobs:
         id: build
         run: |
           FILES=$(git diff --name-only HEAD^ HEAD -- '社群貼文/*.html')
-          BODY="今天的貼文已經寫好並推上 GitHub："
+          BODY="【效果升學書局】今天的貼文已經寫好並推上 GitHub："
           for f in $FILES; do
             ENCODED=$(python3 -c "import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1]))" "$f")
             BODY="${BODY}"$'\n'"https://design02-5.github.io/xiaoguo-social-posts/${ENCODED}"
