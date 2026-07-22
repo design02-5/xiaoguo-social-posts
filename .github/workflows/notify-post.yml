@@ -39,6 +39,7 @@ jobs:
             ENCODED=$(python3 -c "import urllib.parse,sys; print(urllib.parse.quote(sys.argv[1]))" "$f")
             BODY="${BODY}"$'\n'"https://design02-5.github.io/xiaoguo-social-posts/${ENCODED}"
           done
+          BODY="${BODY}"$'\n\n'"📌 記得依每篇HTML裡的「配圖提示詞」區塊手動生圖，存檔後依指定檔名上傳到同一個資料夾"
           echo "body<<EOF" >> $GITHUB_OUTPUT
           echo "$BODY" >> $GITHUB_OUTPUT
           echo "EOF" >> $GITHUB_OUTPUT
